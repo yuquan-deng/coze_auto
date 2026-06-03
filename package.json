@@ -1,0 +1,19 @@
+{
+  "name": "coze-workflow-mvp",
+  "version": "1.0.0",
+  "description": "A minimal Express and vanilla JavaScript MVP for calling a published Coze Workflow.",
+  "main": "server.js",
+  "type": "commonjs",
+  "scripts": {
+    "start": "node server.js",
+    "dev": "node server.js",
+    "test": "node --test"
+  },
+  "engines": {
+    "node": ">=18"
+  },
+  "dependencies": {
+    "dotenv": "^16.4.7",
+    "express": "^4.21.2"
+  }
+}

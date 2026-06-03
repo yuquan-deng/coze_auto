@@ -1,0 +1,130 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Coze 工作流调用面板</title>
+    <link rel="stylesheet" href="/styles.css" />
+  </head>
+  <body>
+    <main class="page">
+      <header class="page-header">
+        <div>
+          <h1>Coze 工作流调用面板</h1>
+          <p>填写基础参数后，点击按钮调用已发布的 Coze Workflow。</p>
+        </div>
+      </header>
+
+      <section class="panel">
+        <form id="workflowForm" class="workflow-form">
+          <div class="form-grid">
+            <label class="field">
+              <span>输入平台</span>
+              <select id="platform_in" name="platform_in" required>
+                <option value="小红书">小红书</option>
+                <option value="公众号">公众号</option>
+                <option value="抖音">抖音</option>
+              </select>
+            </label>
+
+            <label class="field">
+              <span>输出平台</span>
+              <select id="platform_out" name="platform_out" required>
+                <option value="公众号">公众号</option>
+                <option value="小红书">小红书</option>
+              </select>
+            </label>
+          </div>
+
+          <label class="field">
+            <span>内容链接</span>
+            <div class="url-input-wrap">
+              <textarea
+                id="url"
+                name="url"
+                rows="2"
+                placeholder="请输入公众号、小红书、网页等内容链接"
+                autocomplete="off"
+                required
+              ></textarea>
+              <button
+                id="clearUrlButton"
+                class="url-clear-button"
+                type="button"
+                aria-label="清空内容链接"
+                title="清空内容链接"
+                hidden
+              >
+                &times;
+              </button>
+            </div>
+          </label>
+
+          <label class="field">
+            <span>补充要求</span>
+            <textarea
+              id="prompt"
+              name="prompt"
+              rows="3"
+              placeholder="例如：科技风、偏转化、适合小红书图文、面向内存条贸易客户等"
+            ></textarea>
+          </label>
+
+          <button id="submitButton" class="primary-button" type="submit">运行工作流</button>
+        </form>
+      </section>
+
+      <section class="panel notice-panel" aria-labelledby="noticeTitle">
+        <h2 id="noticeTitle">注意事项</h2>
+        <ol class="notice-list">
+          <li>输入的小红书链接必须是网页版的链接，不然读取不了</li>
+          <li>最好不要同平台改写，避免查重</li>
+          <li>读取时间较长失败可以重试一次或换别的素材</li>
+          <li>
+            <span>公众号→小红书2min左右</span>
+            <div class="notice-times">
+              <span>公众号→公众号4min左右</span>
+              <span>小红书→公众号4min左右</span>
+              <span>小红书→小红书2min左右</span>
+              <span>抖音→公众号4min左右</span>
+              <span>抖音→小红书2min左右</span>
+            </div>
+          </li>
+          <li>选取的抖音视频素材不宜过长</li>
+          <li>上传部分公众号和小红书要是图文，抖音要是视频</li>
+          <li>
+            <span>生成小红书内容，可直接用生成的二维码导入</span>
+            <span class="notice-extra">公众号内容需配置API及ip白名单</span>
+          </li>
+        </ol>
+      </section>
+
+      <section class="panel result-panel">
+        <div class="status-row">
+          <span class="status-label">状态</span>
+          <span id="statusBadge" class="status-badge idle">未运行</span>
+        </div>
+
+        <div id="progressPanel" class="progress-panel idle" aria-live="polite">
+          <div class="progress-header">
+            <span class="progress-title">实时进度</span>
+            <span id="progressPhase" class="progress-phase">等待运行</span>
+          </div>
+          <div id="progressLabel" class="progress-label">等待运行</div>
+          <div class="progress-meta">
+            <span>当前节点：<strong id="progressNode">-</strong></span>
+            <span>事件数：<strong id="progressEventCount">0</strong></span>
+            <span>耗时：<strong id="progressElapsed">-</strong></span>
+          </div>
+        </div>
+
+        <div class="result-block">
+          <h2>解析结果</h2>
+          <pre id="parsedResult" class="result-pre empty">暂无结果</pre>
+        </div>
+      </section>
+    </main>
+
+    <script src="/app.js"></script>
+  </body>
+</html>
