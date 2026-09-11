@@ -17,6 +17,8 @@ coze-workflow-mvp/
 ├── .env.example
 ├── .gitignore
 ├── README.md
+├── docs/
+│   └── images/            # README 预览截图
 └── public/
     ├── index.html
     ├── styles.css
@@ -127,6 +129,50 @@ http://localhost:3000
 ```
 
 `api_token`、`app_id`、`app_secret`、`key` 不会出现在页面、前端代码或浏览器请求体中。后端会从 `.env` 读取这些固定参数，并在调用 Coze 时自动合并到 `parameters`。
+
+## 界面与产出预览
+
+以下截图来自本地运行环境（`npm run dev` 启动服务 + 已发布的 Coze Workflow）。
+
+### 页面展示 · 工作流调用面板
+
+<p align="center">
+  <img src="docs/images/screenshot-call-panel.png" width="880" alt="Coze 工作流调用面板">
+</p>
+
+<p align="center">
+  <sub>选择输入平台、输出平台、目标公众号，填写内容链接与补充要求后，点击「运行工作流」即调用已发布的 Coze Workflow；页面底部给出链接格式、同平台改写风险和各方向耗时提示。</sub>
+</p>
+
+### 后端工作流 · 开始节点入参
+
+<p align="center">
+  <img src="docs/images/screenshot-workflow-start.png" width="760" alt="Coze 工作流开始节点输入参数">
+</p>
+
+<p align="center">
+  <sub>Coze 工作流「开始」节点声明的入参：<code>url</code>、<code>prompt</code>、<code>platform_in</code>、<code>platform_out</code> 由前端传入，<code>app_id</code>、<code>app_secret</code>、<code>key</code>、<code>api_token</code> 由后端从 <code>.env</code> 补齐（<code>prompt</code> 非必填）。</sub>
+</p>
+
+### 后端工作流 · 完整编排
+
+<p align="center">
+  <img src="docs/images/screenshot-workflow-canvas.jpg" width="880" alt="Coze 工作流完整编排">
+</p>
+
+<p align="center">
+  <sub>已发布工作流的整体编排与分支：读取来源链接后按平台分支处理，最终产出目标平台的内容。（截图为屏幕翻拍，节点文字较模糊，仅用于展示编排规模。）</sub>
+</p>
+
+### 生成结果 · 小红书与公众号
+
+<p align="center">
+  <img src="docs/images/screenshot-generated-output.jpg" width="600" alt="小红书与公众号生成结果">
+</p>
+
+<p align="center">
+  <sub>同一批素材分别产出小红书图文与公众号推文：标题、正文与配图卡片均由工作流生成。</sub>
+</p>
 
 ## 接口说明
 
